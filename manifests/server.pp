@@ -41,6 +41,7 @@ class rabbitmq::server(
   $config_cluster = false,
   $cluster_disk_nodes = [],
   $node_ip_address = 'UNSET',
+  $install_pkg = true,
   $config='UNSET',
   $env_config='UNSET',
   $erlang_cookie='EOKOWXQREETZSHFNTPEY',
@@ -71,9 +72,11 @@ class rabbitmq::server(
 
   $plugin_dir = "/usr/lib/rabbitmq/lib/rabbitmq_server-${version_real}/plugins"
 
-  package { $package_name:
-    ensure => $pkg_ensure_real,
-    notify => Class['rabbitmq::service'],
+  if $install_pkg {
+    package { $package_name:
+      ensure => $pkg_ensure_real,
+      notify => Class['rabbitmq::service'],
+    }
   }
 
   file { '/etc/rabbitmq':
