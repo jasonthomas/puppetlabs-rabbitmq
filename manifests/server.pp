@@ -12,6 +12,7 @@
 #  [*stomp_port*] - port stomp should be listening on
 #  [*node_ip_address*] - ip address for rabbitmq to bind to
 #  [*config*] - contents of config file
+#  [*nodename*] - defines nodename enviroment variable
 #  [*env_config*] - contents of env-config file
 #  [*config_cluster*] - whether to configure a RabbitMQ cluster
 #  [*cluster_disk_nodes*] - which nodes to cluster with (including the current one)
@@ -41,6 +42,7 @@ class rabbitmq::server(
   $config_cluster = false,
   $cluster_disk_nodes = [],
   $node_ip_address = 'UNSET',
+  $nodename = undef,
   $install_pkg = true,
   $config='UNSET',
   $env_config='UNSET',
