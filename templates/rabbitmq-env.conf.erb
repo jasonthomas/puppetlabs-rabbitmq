@@ -2,3 +2,6 @@ RABBITMQ_NODE_PORT=<%= port %>
 <% if node_ip_address != 'UNSET' -%>
 RABBITMQ_NODE_IP_ADDRESS=<%= node_ip_address %>
 <% end -%>
+<% if nodename != :undef -%>
+RABBITMQ_NODENAME=<%= nodename %>
+<% end -%>
