@@ -143,6 +143,13 @@ class rabbitmq::server(
     ensure       => $service_ensure,
   }
 
+  # make queues ha
+  exec { 'ha-queue':
+    require => Service['rabbitmq-server'],
+    command => '/usr/sbin/rabbitmqctl set_policy ha-all "^.*" \'{"ha-mode":"all"}\' && touch /root/.haqueue',
+    creates => '/root/.haqueue'
+  }
+
   if $delete_guest_user {
     # delete the default guest user
     rabbitmq_user{ 'guest':
